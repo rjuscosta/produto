@@ -41,10 +41,15 @@ router.put('/produtos/categorias/:id', async (req, res) => {
 });
 
 
-router.get('/produtos', async (req, res) => {
+router.get('/produtos/search', async (req, res) => {
 
-    
-   res.send('title: ' +req.query.title)
+    const { title, category } = req.query
+
+    await Produto.find({title: req.query.title}).then(produtos => {
+        res.json(produtos)
+    })
+
+    console.log(req.query)
 })
 
 
