@@ -6,7 +6,7 @@ const router = express.Router();
 require('../Model/Produto');
 const Produto = mongoose.model('Produtos');
 
-
+//cadastro do produto
 router.post('/cadastro/produtos', async(req, res) => {
     await Produto.create(req.body).then(produtos => {
             return res.json({ message: 'Produto cadastrado com sucesso!' })
@@ -16,7 +16,7 @@ router.post('/cadastro/produtos', async(req, res) => {
 
     
 });
-
+//listagem do produto
 router.get('/produtos', async (req, res) => {
     Produto.find().then((produtos) => {
     
@@ -26,7 +26,7 @@ router.get('/produtos', async (req, res) => {
     })
 });
 
-
+//Edição da categoria do produto
 router.put('/produtos/categorias/:id', async (req, res) => {
 
     const {category} = req.body;
@@ -40,19 +40,21 @@ router.put('/produtos/categorias/:id', async (req, res) => {
 
 });
 
-
+//procurar title do produto e categoria(porém não consegui fazer esse a tempo)
 router.get('/produtos/search', async (req, res) => {
 
     const { title, category } = req.query
 
     await Produto.find({title: req.query.title}).then(produtos => {
         res.json(produtos)
+    }).catch((err) => {
+        res.status(400).json({message: 'Não possivel encontrar esse produto'})
     })
 
     console.log(req.query)
 })
 
-
+//atualizar o produto
 router.put('/produtos/:id', async (req, res) => {
     
     await Produto.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((produtos) => {
@@ -65,6 +67,7 @@ router.put('/produtos/:id', async (req, res) => {
 
 });
 
+//deletar um produto
 router.delete('/produtos/delete/:id', async (req, res) => {
     await Produto.findByIdAndDelete(req.params.id).then(() => {
         res.json({message: 'Produto deletado com sucesso!'})
