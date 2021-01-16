@@ -40,16 +40,19 @@ router.put('/produtos/categorias/:id', async (req, res) => {
 
 });
 
-//procurar title do produto e categoria(porém não consegui fazer esse a tempo)
+//procurar title do categoria e produto(porém não consegui fazer esse a tempo)
 router.get('/produtos/search', async (req, res) => {
 
     const { title, category } = req.query
 
-    await Produto.find({title: req.query.title}).then(produtos => {
+    await Produto.find({category: req.query.category}).then(produtos => {      
         res.json(produtos)
     }).catch((err) => {
         res.status(400).json({message: 'Não possivel encontrar esse produto'})
     })
+
+
+   
 
     console.log(req.query)
 })

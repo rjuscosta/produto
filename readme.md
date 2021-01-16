@@ -13,7 +13,7 @@ User stories:
 
 
 # Método de uso da api
- 
+
  Para executar o projeto clone esse repositorio, inicie le usando nodemon app.js 
  use o inmsominia ou postman e use as rodas indicadas
 
@@ -21,7 +21,7 @@ Criar um produto http://localhost:3333/cadastro/produtos
 
 Listar os produtos http://localhost:3333/produtos
 
-Listar os produtos por title http://localhost:3333/produtos/search?title = "title"
+Listar os produtos por title http://localhost:3333/produtos/search?categoria = "name"
 
 Editar a categoria de um produto http://localhost:3333/produtos/categorias/<id do produto>
 
