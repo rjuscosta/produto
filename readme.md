@@ -5,6 +5,8 @@ Criar um produto http://localhost:3333/cadastro/produtos
 
 Listar os produtos http://localhost:3333/produtos
 
+Listar os produtos por title http://localhost:3333/produtos/search?title = "title"
+
 Editar a categoria de um produto http://localhost:3333/produtos/categorias/<id do produto>
 
 Editar um produto http://localhost:3333/produtos/<id do produto>
