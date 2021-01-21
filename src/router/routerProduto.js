@@ -51,10 +51,6 @@ router.get('/produtos/search', async (req, res) => {
         res.status(400).json({message: 'Não possivel encontrar esse produto'})
     })
 
-
-   
-
-    console.log(req.query)
 })
 
 //atualizar o produto
