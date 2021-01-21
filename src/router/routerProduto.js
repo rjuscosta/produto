@@ -45,7 +45,7 @@ router.get('/produtos/search', async (req, res) => {
 
     const { title, category } = req.query
 
-    await Produto.find({category: req.query.category}).then(produtos => {      
+    await Produto.find({$or:[{category: req.query.category}, {title: req.query.title}]}).then(produtos => {      
         res.json(produtos)
     }).catch((err) => {
         res.status(400).json({message: 'Não possivel encontrar esse produto'})
