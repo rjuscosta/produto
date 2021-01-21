@@ -40,7 +40,7 @@ router.put('/produtos/categorias/:id', async (req, res) => {
 
 });
 
-//procurar title do categoria e produto(porém não consegui fazer esse a tempo)
+//procurar title do categoria e produto
 router.get('/produtos/search', async (req, res) => {
 
     const { title, category } = req.query
