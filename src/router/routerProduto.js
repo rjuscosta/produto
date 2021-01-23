@@ -23,7 +23,7 @@ router.post('/cadastro/categorias', async(req, res) => {
 
 //listagem do produto
 router.get('/produtos', async (req, res) => {
-    Produto.find().lean().populate("categoria").sort().then((produtos) => {
+   await Produto.find().lean().populate("categoria").sort().then((produtos) => {
         return res.json(produtos)
     }).catch((err) => {
         res.json({message: 'Nenhum produto encontrado!'})
@@ -81,8 +81,9 @@ router.put('/produtos/categorias/:id', async (req, res) => {
 router.get('/produtos/search', async (req, res) => {
 
     const { title, category } = req.query
+    
 
-    await Produto.find({$or:[{category: req.query.category}, {title: req.query.title}]}).then(produtos => {      
+    await Produto.find({$or:[{title: req.query.title}, {category: req.query.category}]}).lean().populate("categoria").then(produtos => {      
         res.json(produtos)
     }).catch((err) => {
         res.status(400).json({message: 'Não possivel encontrar esse produto'})

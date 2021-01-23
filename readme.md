@@ -17,15 +17,20 @@ User stories:
  Para executar o projeto clone esse repositorio, inicie le usando nodemon app.js 
  use o inmsominia ou postman e use as rodas indicadas
 
-Criar um produto http://localhost:3333/cadastro/produtos
+ Criar uma categoria [post] http://localhost:3333/cadastro/categoria
 
-Listar os produtos http://localhost:3333/produtos
+Listar uma categoria [get] http://localhost:3333/cadastro/produtos 
 
-Listar os produtos por title http://localhost:3333/produtos/search?categoria = "name"
+Criar um produto [post] http://localhost:3333/cadastro/produtos (ao adicionar categoria coloque o id de uma categoria )
 
-Editar a categoria de um produto http://localhost:3333/produtos/categorias/<id do produto>
+Listar os produtos [get] http://localhost:3333/produtos
 
-Editar um produto http://localhost:3333/produtos/<id do produto>
+Listar os produtos por categoria  [get] http://localhost:3333/produtos/search?categoria = "Id da categoria"
+Listar os produtos por title  [get] http://localhost:3333/produtos/search?title = "name"
 
-Deletar um produto http://localhost:3333/produtos/delete/<id do produto>
+Editar a categoria de um produto [put] http://localhost:3333/produtos/categorias/<id do produto>
+
+Editar um produto [put] http://localhost:3333/produtos/<id do produto>
+
+Deletar um produto [put] http://localhost:3333/produtos/delete/<id do produto>
 
