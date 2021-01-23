@@ -6,25 +6,62 @@ const router = express.Router();
 require('../Model/Produto');
 const Produto = mongoose.model('Produtos');
 
-//cadastro do produto
-router.post('/cadastro/produtos', async(req, res) => {
-    await Produto.create(req.body).then(produtos => {
-            return res.json({ message: 'Produto cadastrado com sucesso!' })
+require('../Model/Categoria');
+const Categoria = mongoose.model('Categorias');
+
+//cadastro de categorias
+router.post('/cadastro/categorias', async(req, res) => {
+    await Categoria.create(req.body).then(categorias => {
+
+            return res.json({ message: 'categoria cadastrada com sucesso!' })
     }).catch(err => {
-        return res.status(400).json({ message: 'Erro ao cadastrar o produto!' +err})
+        return res.status(400).json({ message: 'Erro ao cadastrar a categoria!' +err})
     })
 
     
-});
+})
+
 //listagem do produto
 router.get('/produtos', async (req, res) => {
-    Produto.find().then((produtos) => {
-    
+    Produto.find().lean().populate("categoria").sort().then((produtos) => {
         return res.json(produtos)
     }).catch((err) => {
         res.json({message: 'Nenhum produto encontrado!'})
     })
 });
+
+
+
+//Aqui busca as categorias cadastradas
+
+router.get('/cadastro/produtos', async(req, res) => {
+    await Categoria.find().then(categorias => {
+            return res.json(categorias)
+    }).catch(err => {
+        return res.status(400).json({ message: 'Erro ao cadastrar o encontrar ccd as categorias!' +err})
+    })
+    
+});
+
+//cadastro do produto
+router.post('/cadastro/produtos', async(req, res) => {
+
+    const novoProduto = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        category: req.body.category,
+    }
+
+    new Produto(novoProduto).save().then(() => {
+        res.json({message: 'Produto cadastrado com sucesso!'})
+    }).catch((err) => {
+        return res.status(400).json({ message: 'Erro ao cadastrar o produto!' +err})
+    })
+   
+    
+});
+
 
 //Edição da categoria do produto
 router.put('/produtos/categorias/:id', async (req, res) => {

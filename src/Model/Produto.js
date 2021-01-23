@@ -14,10 +14,14 @@ const ProdutoSchema = mongoose.Schema({
         require: true
     },
     category: {
-        type: String,
-        ref: "categorias",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categorias",
         required: true
     },
+    data:{
+        type: Date,
+        default: Date.now()
+    }
 });
 
 module.exports = mongoose.model('Produtos', ProdutoSchema);
