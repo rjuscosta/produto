@@ -41,7 +41,6 @@ router.get('/cadastro/produtos', async(req, res) => {
     })
     
 });
-
 //cadastro do produto
 router.post('/cadastro/produtos', async(req, res) => {
 
@@ -68,6 +67,7 @@ router.put('/produtos/categorias/:id', async (req, res) => {
     const {category} = req.body;
     
     await Produto.findOneAndUpdate(req.params.id, req.body.category, { new: true }).then((produtos) => {
+
         return res.json(produtos)
 
     }).catch((err) => {
@@ -85,7 +85,7 @@ router.get('/produtos/search', async (req, res) => {
     await Produto.find({$or:[{title: req.query.title}, {category: req.query.category}]}).lean().populate("categoria").then(produtos => {      
         res.json(produtos)
     }).catch((err) => {
-        res.status(400).json({message: 'Não possivel encontrar esse produto'})
+        res.status(400).json({message: 'Não foi possivel encontrar esse produto'})
     })
 
 })
