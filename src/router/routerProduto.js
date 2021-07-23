@@ -1,5 +1,4 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
 const  mongoose  = require('mongoose');
 const router = express.Router();
 
@@ -38,7 +37,7 @@ router.get('/cadastro/produtos', async(req, res) => {
     await Categoria.find().then(categorias => {
             return res.json(categorias)
     }).catch(err => {
-        return res.status(400).json({ message: 'Erro ao cadastrar o encontrar ccd as categorias!' +err})
+        return res.status(400).json({ message: 'Erro ao encontrar as categorias!' +err})
     })
     
 });

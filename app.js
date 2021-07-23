@@ -16,6 +16,8 @@ mongoose.connect('mongodb://localhost/produtos', {
     useFindAndModify: false,
     useCreateIndex: true
 
+}).catch(err => {
+    console.log(err)
 });
 
 app.use('/', routerProduto);
