@@ -9,7 +9,7 @@ const Categoria = mongoose.model('Categorias');
 module.exports = {
     
 //cadastro de categorias
- async createCategorias(req, res) => {
+ async createCategorias(req, res)  {
     await Categoria.create(req.body).then(categorias => {
 
             return res.json({ message: 'categoria cadastrada com sucesso!' })
@@ -18,31 +18,31 @@ module.exports = {
     })
 
     
-})
+},
 
 //listagem do produto
- async getProdutos(req, res) => {
+ async getProdutos(req, res)  {
    await Produto.find().lean().populate("categoria").sort().then((produtos) => {
         return res.json(produtos)
     }).catch((err) => {
         res.json({message: 'Nenhum produto encontrado!'})
     })
-});
+},
 
 
 
 //Aqui busca as categorias cadastradas
 
- async getCategorias(req, res) => {
+ async getCategorias(req, res)  {
     await Categoria.find().then(categorias => {
             return res.json(categorias)
     }).catch(err => {
         return res.status(400).json({ message: 'Erro ao encontrar as categorias!' +err})
     })
     
-});
+},
 //cadastro do produto
- async createProduto(req, res) => {
+ async createProduto(req, res)  {
 
     const novoProduto = {
         title: req.body.title,
@@ -58,11 +58,11 @@ module.exports = {
     })
    
     
-});
+},
 
 
 //Edição da categoria do produto
- async updateCategoria(req, res) => {
+ async updateCategoria(req, res)  {
 
     const {category} = req.body;
     
@@ -74,10 +74,10 @@ module.exports = {
         res.status(400).json({message: 'Houve um erro ao atualizar o produto'})
     })
 
-});
+},
 
 //procurar title do categoria e produto
- async findTitleCategoria(req, res) => {
+ async findTitleCategoria(req, res)  {
 
     const { title, category } = req.query
     
@@ -88,10 +88,10 @@ module.exports = {
         res.status(400).json({message: 'Não foi possivel encontrar esse produto'})
     })
 
-})
+},
 
 //atualizar o produto
- async updateProduto(req, res) => {
+ async updateProduto(req, res) {
     
     await Produto.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((produtos) => {
 
@@ -101,15 +101,15 @@ module.exports = {
         res.status(400).json({message: 'Houve um erro ao atualizar o produto'})
     })
 
-});
+},
 
 //deletar um produto
- async deleteProduto(req, res) => {
+ async deleteProduto(req, res) {
     await Produto.findByIdAndDelete(req.params.id).then(() => {
         res.json({message: 'Produto deletado com sucesso!'})
     }).catch((err) => {
         res.status(400).json({message: 'Houve um erro ao deletar produto!'})
     })
-});
+ }
 
 }
